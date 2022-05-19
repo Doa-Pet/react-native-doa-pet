@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "doaPet",
+    "slug": "doaPet",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
