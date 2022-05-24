@@ -6,7 +6,7 @@ export const Container = styled.View`
   flex: 1;
   background: ${({ theme }) => theme.colors.background};
 
-  padding: 0 40px;
+  padding: 0 ${RFValue(40)}px;
 `
 
 export const Logo = styled(Image)`

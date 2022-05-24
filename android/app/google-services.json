@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "106094569898",
+    "project_id": "doa-pet",
+    "storage_bucket": "doa-pet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106094569898:android:a3d3060ec0f02d9d9923d3",
+        "android_client_info": {
+          "package_name": "com.doapet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106094569898-q457jd2m630n48psq3n4c5k9td5vongb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doapet",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "106094569898-ffh1o3qhqv9h9sctbuj7fma89m41kver.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHYys8pvJRI6PiIMEuo_fz6uoCgmDsm5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106094569898-ffh1o3qhqv9h9sctbuj7fma89m41kver.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
