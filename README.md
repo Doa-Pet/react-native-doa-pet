@@ -1,5 +1,7 @@
-<img src="github/images/logo.png" />
-
+<h1 align="center">
+  <img src="github/images/name.png" height="100"/>
+</h1>
+  
 <img src="github/images/mockup.png" />
 
 **Colaboradores**
