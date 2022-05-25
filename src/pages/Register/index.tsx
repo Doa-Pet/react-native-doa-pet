@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/auth'
 import { ArrowIcon, BackButton, Container, Title } from './styles'
 
 export const Register = () => {
-  const { signIn } = useContext(AuthContext)
+  const { signUp } = useContext(AuthContext)
   const navigation = useNavigation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -14,7 +14,7 @@ export const Register = () => {
   const [phone, setPhone] = useState('')
 
   async function handleRegister() {
-    await signIn(email, password)
+    await signUp(email, password, confirmPassword, phone)
   }
 
   return (

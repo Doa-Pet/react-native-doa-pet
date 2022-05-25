@@ -11,7 +11,7 @@ import {
   Inter_600SemiBold,
 } from '@expo-google-fonts/inter'
 
-import { Routes } from './routes'
+import { Routes } from './Routes'
 import theme from './global/theme'
 import AuthProvider from './context/auth'
 
