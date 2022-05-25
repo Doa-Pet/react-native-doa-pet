@@ -12,10 +12,10 @@
 - Pedro Henrique França de Deus   **190418**  **Nenhuma** **PA038TIN3**
 
 **Planejamentos e Objetivos**
-- Modelagem das entidades (concluido)
-- Criação e estruturação do projeto Firebase (concluido)
-- Design da pagina inicial (concluido)
-- Criação do projeto ReactNative (concluido)
+- Modelagem das entidades (concluído)
+- Criação e estruturação do projeto Firebase (concluído)
+- Design da pagina inicial (concluído)
+- Criação do projeto ReactNative (concluído)
 - Instalação do firebase no projeto (pendente)
 - Criação e integração da tela de Login (pendente)
 - Criação da tela inicial (pendente)
