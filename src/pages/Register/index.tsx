@@ -12,9 +12,12 @@ export const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [phone, setPhone] = useState('')
+  const [name, setName] = useState('')
 
   async function handleRegister() {
-    await signUp(email, password, confirmPassword, phone)
+    if (password === confirmPassword) {
+      await signUp(email, password, phone, name)
+    }
   }
 
   return (
@@ -25,13 +28,15 @@ export const Register = () => {
       <Title>Registrar</Title>
 
       <Input label='Email' value={email} onChangeText={setEmail} />
-      <Input label='Senha' value={password} onChangeText={setPassword} />
+      <Input label='Senha' value={password} onChangeText={setPassword} secureText={true} />
       <Input
         label='Confirmar senha'
         value={confirmPassword}
         onChangeText={setConfirmPassword}
+        secureText={true}
       />
       <Input label='Telefone' value={phone} onChangeText={setPhone} />
+      <Input label='Nome' value={name} onChangeText={setName} />
 
       <Button label='Registrar' onPress={handleRegister} />
     </Container>

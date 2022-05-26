@@ -37,8 +37,8 @@ export default function AuthProvider({ children }: ReactElement) {
       console.log(response);
 
       await database().ref(response.user.uid).set({
-        phone,
         name,
+        phone,
       })
     } catch (err) {
       console.log(err);
