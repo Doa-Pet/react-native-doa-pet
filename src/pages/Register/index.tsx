@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
+import { StatusBar } from 'expo-status-bar'
 import React, { useContext, useState } from 'react'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
@@ -22,21 +23,27 @@ export const Register = () => {
 
   return (
     <Container>
+      <StatusBar style='dark' />
       <BackButton>
         <ArrowIcon onPress={() => navigation.goBack()} />
       </BackButton>
       <Title>Registrar</Title>
 
+      <Input label='Nome' value={name} onChangeText={setName} />
+      <Input label='Telefone' value={phone} onChangeText={setPhone} />
       <Input label='Email' value={email} onChangeText={setEmail} />
-      <Input label='Senha' value={password} onChangeText={setPassword} secureText={true} />
+      <Input
+        label='Senha'
+        value={password}
+        onChangeText={setPassword}
+        secureText={true}
+      />
       <Input
         label='Confirmar senha'
         value={confirmPassword}
         onChangeText={setConfirmPassword}
         secureText={true}
       />
-      <Input label='Telefone' value={phone} onChangeText={setPhone} />
-      <Input label='Nome' value={name} onChangeText={setName} />
 
       <Button label='Registrar' onPress={handleRegister} />
     </Container>

@@ -32,10 +32,17 @@ export const Login = () => {
 
       <InputArea>
         <Input label='Email' value={email} onChangeText={setEmail} />
-        <Input label='Senha' value={password} onChangeText={setPassword} />
+        <Input
+          label='Senha'
+          value={password}
+          onChangeText={setPassword}
+          secureText={true}
+        />
       </InputArea>
 
-      <ForgetPasswordButton>
+      <ForgetPasswordButton
+        onPress={() => navigation.navigate('ForgetPassword')}
+      >
         <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
       </ForgetPasswordButton>
 

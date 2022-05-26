@@ -8,7 +8,12 @@ interface InputProps {
   secureText?: boolean
 }
 
-export const Input = ({ label, value, onChangeText, secureText }: InputProps) => {
+export const Input = ({
+  label,
+  value,
+  onChangeText,
+  secureText,
+}: InputProps) => {
   const [passwordHide, setPasswordHide] = useState(secureText)
 
   return (
@@ -18,7 +23,6 @@ export const Input = ({ label, value, onChangeText, secureText }: InputProps) =>
       value={value}
       onChangeText={text => onChangeText(text)}
       secureTextEntry={passwordHide}
-      right={passwordHide ? <Container.Icon name='eye' onPress={() => setPasswordHide(!passwordHide)} /> : <Container.Icon name='eye-off' onPress={() => setPasswordHide(!passwordHide)} />}
     />
   )
 }
