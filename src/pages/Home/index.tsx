@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useContext, useEffect, useState } from 'react'
+import { showMessage } from 'react-native-flash-message'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { AuthContext } from '../../context/auth'
@@ -17,18 +18,17 @@ import {
 type authProps = StackNavigationProp<AuthParamList>
 
 export const Home = () => {
-  const { signIn } = useContext(AuthContext)
+  const { signOut } = useContext(AuthContext)
   const navigation = useNavigation<authProps>()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
 
   async function handleLogin() {
-    await signIn(email, password)
+    signOut()
   }
 
   return (
     <Container>
       <ForgotPasswordText>Home</ForgotPasswordText>
+      <Button onPress={handleLogin} label='testes' />
     </Container>
   )
 }

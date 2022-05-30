@@ -14,6 +14,7 @@ import {
 import { Routes } from './routes'
 import theme from './global/theme'
 import AuthProvider from './context/auth'
+import FlashMessage from 'react-native-flash-message'
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -32,6 +33,7 @@ export default function App() {
         <ThemeProvider theme={theme}>
           <Routes />
           <StatusBar style='auto' />
+          <FlashMessage position={'top'} autoHide />
         </ThemeProvider>
       </AuthProvider>
     </NavigationContainer>

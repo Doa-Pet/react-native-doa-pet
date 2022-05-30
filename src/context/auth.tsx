@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react'
 import auth from '@react-native-firebase/auth'
 import database from '@react-native-firebase/database'
+import { showMessage } from 'react-native-flash-message'
+import theme from '../global/theme'
 
 interface AuthContextProps {
   signed: boolean
@@ -12,7 +14,7 @@ interface AuthContextProps {
     name: string
   ) => Promise<void>
   forgetPassword: (email: string) => Promise<void>
-  // signOut: () => void
+  signOut: () => void
 }
 
 export const AuthContext = createContext({} as AuthContextProps)
@@ -53,6 +55,12 @@ export default function AuthProvider({ children }: ReactElement) {
         name,
         phone,
       })
+
+      showMessage({
+        message: 'Usuário criado com sucesso!',
+        type: 'success',
+        backgroundColor: theme.colors.confirmation,
+      })
     } catch (err) {
       console.log(err)
     }
@@ -66,6 +74,15 @@ export default function AuthProvider({ children }: ReactElement) {
     }
   }
 
+  const signOut = async () => {
+    try {
+      await auth().signOut()
+      setUser(null)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -73,7 +90,7 @@ export default function AuthProvider({ children }: ReactElement) {
         signIn,
         signUp,
         forgetPassword,
-        // signOut,
+        signOut,
       }}
     >
       {children}

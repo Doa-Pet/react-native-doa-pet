@@ -1,14 +1,18 @@
 import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { StatusBar } from 'expo-status-bar'
 import React, { useContext, useState } from 'react'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { AuthContext } from '../../context/auth'
+import { AuthParamList } from '../../Routes/auth.routes'
 import { ArrowIcon, BackButton, Container, Title } from './styles'
+
+type authProps = StackNavigationProp<AuthParamList>
 
 export const Register = () => {
   const { signUp } = useContext(AuthContext)
-  const navigation = useNavigation()
+  const navigation = useNavigation<authProps>()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -18,6 +22,7 @@ export const Register = () => {
   async function handleRegister() {
     if (password === confirmPassword) {
       await signUp(email, password, phone, name)
+      navigation.navigate('Login')
     }
   }
 

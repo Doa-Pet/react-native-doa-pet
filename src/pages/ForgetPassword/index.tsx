@@ -5,13 +5,21 @@ import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { AuthContext } from '../../context/auth'
 import { ArrowIcon, BackButton, Container, Title } from './styles'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { AuthParamList } from '../../Routes/auth.routes'
+
+type authProps = StackNavigationProp<AuthParamList>
 
 export const ForgetPassword = () => {
-  const { signUp } = useContext(AuthContext)
-  const navigation = useNavigation()
+  const { forgetPassword } = useContext(AuthContext)
+  const navigation = useNavigation<authProps>()
   const [email, setEmail] = useState('')
 
-  async function handleRegister() {}
+  async function handleRegister() {
+    await forgetPassword(email)
+
+    navigation.navigate('Login')
+  }
 
   return (
     <Container>
@@ -23,7 +31,7 @@ export const ForgetPassword = () => {
 
       <Input label='Email' value={email} onChangeText={setEmail} />
 
-      <Button label='Registrar' onPress={handleRegister} />
+      <Button label='Enviar' onPress={handleRegister} />
     </Container>
   )
 }
