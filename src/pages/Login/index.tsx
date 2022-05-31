@@ -1,9 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { StatusBar } from 'expo-status-bar'
 import React, { useContext, useEffect, useState } from 'react'
+import { showMessage } from 'react-native-flash-message'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { AuthContext } from '../../context/auth'
+import theme from '../../global/theme'
 import { AuthParamList } from '../../Routes/auth.routes'
 
 import {
@@ -23,11 +26,21 @@ export const Login = () => {
   const [password, setPassword] = useState('')
 
   async function handleLogin() {
-    await signIn(email, password)
+    if (email && password) {
+      await signIn(email, password)
+    } else {
+      showMessage({
+        message: 'Preencha os dados para realizar o login!',
+        type: 'success',
+        backgroundColor: theme.colors.error,
+        statusBarHeight: 20,
+      })
+    }
   }
 
   return (
     <Container>
+      <StatusBar style='dark' />
       <Logo />
 
       <InputArea>

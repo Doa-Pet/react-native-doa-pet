@@ -2,9 +2,11 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { StatusBar } from 'expo-status-bar'
 import React, { useContext, useState } from 'react'
+import { showMessage } from 'react-native-flash-message'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { AuthContext } from '../../context/auth'
+import theme from '../../global/theme'
 import { AuthParamList } from '../../Routes/auth.routes'
 import { ArrowIcon, BackButton, Container, Title } from './styles'
 
@@ -20,9 +22,29 @@ export const Register = () => {
   const [name, setName] = useState('')
 
   async function handleRegister() {
-    if (password === confirmPassword) {
+    if (password === confirmPassword && password && email && name && phone) {
       await signUp(email, password, phone, name)
       navigation.navigate('Login')
+    } else if (
+      password !== confirmPassword &&
+      password &&
+      email &&
+      name &&
+      phone
+    ) {
+      showMessage({
+        message: 'As senhas não são correspondentes!',
+        type: 'success',
+        backgroundColor: theme.colors.error,
+        statusBarHeight: 20,
+      })
+    } else {
+      showMessage({
+        message: 'Preencha os dados para realizar o cadastro!',
+        type: 'success',
+        backgroundColor: theme.colors.error,
+        statusBarHeight: 20,
+      })
     }
   }
 

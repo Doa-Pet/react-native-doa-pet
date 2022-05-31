@@ -32,7 +32,7 @@ export default function App() {
       <AuthProvider>
         <ThemeProvider theme={theme}>
           <Routes />
-          <StatusBar style='auto' />
+          <StatusBar style='dark' />
           <FlashMessage position={'top'} autoHide />
         </ThemeProvider>
       </AuthProvider>

@@ -31,6 +31,12 @@ export default function AuthProvider({ children }: ReactElement) {
       const response = await auth().signInWithEmailAndPassword(email, password)
 
       setUser(response)
+      showMessage({
+        message: 'Login feito com sucesso!',
+        type: 'success',
+        backgroundColor: theme.colors.confirmation,
+        statusBarHeight: 20,
+      })
       console.log(response)
     } catch (err) {
       console.log(err)
@@ -60,6 +66,7 @@ export default function AuthProvider({ children }: ReactElement) {
         message: 'Usuário criado com sucesso!',
         type: 'success',
         backgroundColor: theme.colors.confirmation,
+        statusBarHeight: 20,
       })
     } catch (err) {
       console.log(err)
