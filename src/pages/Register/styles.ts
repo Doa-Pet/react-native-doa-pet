@@ -1,8 +1,9 @@
 import { RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
 import Icon from '../../assets/arrow-left.svg'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-export const Container = styled.KeyboardAvoidingView`
+export const Container = styled(KeyboardAwareScrollView)`
   flex: 1;
   background: ${({ theme }) => theme.colors.background};
 

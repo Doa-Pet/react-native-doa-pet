@@ -7,13 +7,7 @@ import { Input } from '../../components/Input'
 import { AuthContext } from '../../context/auth'
 import { AuthParamList } from '../../Routes/auth.routes'
 
-import {
-  Container,
-  ForgetPasswordButton,
-  ForgotPasswordText,
-  InputArea,
-  Logo,
-} from './styles'
+import { Container, Header, HeaderTitle } from './styles'
 
 type authProps = StackNavigationProp<AuthParamList>
 
@@ -27,7 +21,10 @@ export const Home = () => {
 
   return (
     <Container>
-      <ForgotPasswordText>Home</ForgotPasswordText>
+      <Header>
+        <HeaderTitle>Doações</HeaderTitle>
+      </Header>
+
       <Button onPress={handleLogin} label='testes' />
     </Container>
   )
