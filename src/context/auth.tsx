@@ -37,7 +37,13 @@ export default function AuthProvider({ children }: ReactElement) {
         backgroundColor: theme.colors.confirmation,
         statusBarHeight: 20,
       })
-      console.log(response)
+      // console.log(response)
+
+      await database()
+        .ref('users')
+        .on('value', snapshot => {
+          console.log(snapshot.val())
+        })
     } catch (err) {
       console.log(err)
     }
@@ -57,7 +63,7 @@ export default function AuthProvider({ children }: ReactElement) {
 
       console.log(response)
 
-      await database().ref(response.user.uid).set({
+      await database().ref('users').child(response.user.uid).set({
         name,
         phone,
       })
