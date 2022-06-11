@@ -10,7 +10,7 @@ import HomeIcon from '../assets/home.svg'
 import PlusIcon from '../assets/plus.svg'
 import ProfileIcon from '../assets/profile.svg'
 
-export type AuthParamList = {
+export type AppParamList = {
   Home: undefined
 }
 

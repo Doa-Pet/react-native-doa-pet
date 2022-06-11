@@ -1,8 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react'
 import auth from '@react-native-firebase/auth'
 import database from '@react-native-firebase/database'
+import storage from '@react-native-firebase/storage'
 import { showMessage } from 'react-native-flash-message'
 import theme from '../global/theme'
+import { useNavigation } from '@react-navigation/native'
+import { AppParamList } from '../routes/app.routes'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 interface AuthContextProps {
   signed: boolean
@@ -20,18 +24,21 @@ interface AuthContextProps {
     description: string,
     type: string,
     city: string,
-    race: string
+    race: string,
+    image: string
   ) => void
   getPublication: () => void
-  publi: [
-    {
-      city: string
-      description: string
-      race: string
-      title: string
-      type: string
-    }
-  ]
+  publications: PublicationsProps
+  create: boolean
+  setCreate: (state: boolean) => void
+}
+
+export interface PublicationsProps {
+  city: string
+  description: string
+  race: string
+  title: string
+  type: string
 }
 
 export const AuthContext = createContext({} as AuthContextProps)
@@ -40,9 +47,13 @@ interface ReactElement {
   children: React.ReactNode
 }
 
+type authProps = StackNavigationProp<AppParamList>
+
 export default function AuthProvider({ children }: ReactElement) {
   const [user, setUser] = useState(null)
-  const [publi, setPubli] = useState(null)
+  const [publications, setPublications] = useState<PublicationsProps>(null)
+  const navigation = useNavigation<authProps>()
+  const [create, setCreate] = useState(false)
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -55,12 +66,6 @@ export default function AuthProvider({ children }: ReactElement) {
         backgroundColor: theme.colors.confirmation,
         statusBarHeight: 20,
       })
-
-      await database()
-        .ref('users')
-        .on('value', snapshot => {
-          console.log(snapshot.val())
-        })
     } catch (err) {
       console.log(err)
     }
@@ -99,19 +104,32 @@ export default function AuthProvider({ children }: ReactElement) {
     description: string,
     type: string,
     city: string,
-    race: string
+    race: string,
+    image: string
   ) => {
     try {
-      await database()
-        .ref('publications')
-        .child(Math.random().toString().replace('.', ''))
-        .set({
-          title,
-          description,
-          type,
-          city,
-          race,
-        })
+      const id = Math.random().toString().replace('.', '')
+
+      await database().ref('publications').set({
+        title,
+        description,
+        type,
+        city,
+        race,
+        id,
+      })
+
+      setPublications({
+        title,
+        description,
+        type,
+        city,
+        race,
+      })
+
+      setCreate(true)
+
+      navigation.navigate('Home')
     } catch (err) {
       console.log(err)
     }
@@ -119,10 +137,10 @@ export default function AuthProvider({ children }: ReactElement) {
 
   const getPublication = async () => {
     try {
-      await database()
+      database()
         .ref('publications')
         .on('value', snapshot => {
-          setPubli(snapshot.val())
+          setPublications(snapshot.val())
         })
     } catch (err) {
       console.log(err)
@@ -156,7 +174,9 @@ export default function AuthProvider({ children }: ReactElement) {
         signOut,
         createPublication,
         getPublication,
-        publi,
+        publications,
+        create,
+        setCreate,
       }}
     >
       {children}

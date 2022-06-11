@@ -1,8 +1,18 @@
 import React, { useContext, useState } from 'react'
-import { Text, View } from 'react-native'
 import { Input } from '../../components/Input'
 import { AuthContext } from '../../context/auth'
-import { Button, ButtonArea, ButtonText, Container, Title } from './styles'
+import {
+  Button,
+  ButtonArea,
+  ButtonText,
+  Container,
+  ImageButton,
+  ImageButtonText,
+  Title,
+} from './styles'
+import * as ImagePicker from 'expo-image-picker'
+import { AppParamList } from '../../routes/app.routes'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 export const Donation = () => {
   const { createPublication } = useContext(AuthContext)
@@ -11,9 +21,23 @@ export const Donation = () => {
   const [type, setType] = useState('')
   const [city, setCity] = useState('')
   const [race, setRace] = useState('')
+  const [image, setImage] = useState(null)
 
   const handleCreatePublication = () => {
-    createPublication(title, description, type, city, race)
+    createPublication(title, description, type, city, race, image)
+  }
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })
+
+    if (!result.cancelled) {
+      setImage(result.uri)
+    }
   }
 
   return (
@@ -25,6 +49,10 @@ export const Donation = () => {
         onChangeText={setTitle}
         value={title}
       />
+
+      <ImageButton onPress={pickImage}>
+        <ImageButtonText>Selecionar imagem</ImageButtonText>
+      </ImageButton>
 
       <Input
         label='Descrição'

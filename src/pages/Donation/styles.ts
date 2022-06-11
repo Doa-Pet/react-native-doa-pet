@@ -40,3 +40,21 @@ export const ButtonText = styled.Text`
   font-size: ${RFValue(14)}px;
   font-family: ${({ theme }) => theme.fonts.semiBold};
 `
+
+export const ImageButton = styled.TouchableOpacity`
+  margin-bottom: ${RFValue(15)}px;
+
+  background: ${({ theme }) => theme.colors.main};
+  justify-content: center;
+  align-items: center;
+
+  padding: ${RFValue(10)}px;
+  border-radius: ${RFValue(10)}px;
+`
+
+export const ImageButtonText = styled.Text`
+  color: ${({ theme }) => theme.colors.background};
+
+  font-size: ${RFValue(14)}px;
+  font-family: ${({ theme }) => theme.fonts.semiBold};
+`
