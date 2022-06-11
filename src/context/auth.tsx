@@ -15,6 +15,23 @@ interface AuthContextProps {
   ) => Promise<void>
   forgetPassword: (email: string) => Promise<void>
   signOut: () => void
+  createPublication: (
+    title: string,
+    description: string,
+    type: string,
+    city: string,
+    race: string
+  ) => void
+  getPublication: () => void
+  publi: [
+    {
+      city: string
+      description: string
+      race: string
+      title: string
+      type: string
+    }
+  ]
 }
 
 export const AuthContext = createContext({} as AuthContextProps)
@@ -25,6 +42,7 @@ interface ReactElement {
 
 export default function AuthProvider({ children }: ReactElement) {
   const [user, setUser] = useState(null)
+  const [publi, setPubli] = useState(null)
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -37,7 +55,6 @@ export default function AuthProvider({ children }: ReactElement) {
         backgroundColor: theme.colors.confirmation,
         statusBarHeight: 20,
       })
-      // console.log(response)
 
       await database()
         .ref('users')
@@ -61,8 +78,6 @@ export default function AuthProvider({ children }: ReactElement) {
         password
       )
 
-      console.log(response)
-
       await database().ref('users').child(response.user.uid).set({
         name,
         phone,
@@ -74,6 +89,41 @@ export default function AuthProvider({ children }: ReactElement) {
         backgroundColor: theme.colors.confirmation,
         statusBarHeight: 20,
       })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const createPublication = async (
+    title: string,
+    description: string,
+    type: string,
+    city: string,
+    race: string
+  ) => {
+    try {
+      await database()
+        .ref('publications')
+        .child(Math.random().toString().replace('.', ''))
+        .set({
+          title,
+          description,
+          type,
+          city,
+          race,
+        })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const getPublication = async () => {
+    try {
+      await database()
+        .ref('publications')
+        .on('value', snapshot => {
+          setPubli(snapshot.val())
+        })
     } catch (err) {
       console.log(err)
     }
@@ -104,6 +154,9 @@ export default function AuthProvider({ children }: ReactElement) {
         signUp,
         forgetPassword,
         signOut,
+        createPublication,
+        getPublication,
+        publi,
       }}
     >
       {children}
